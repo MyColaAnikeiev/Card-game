@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Демо</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        body{
+            display: flex;
+            background-image: linear-gradient(5deg, #656d6f 5%, #b2c3c4 67%, #ccbbae);
+            align-items: center;
+            justify-content: center;
+        }
+        .canvas-wrapper{
+            border: #2c2d3a33 6px solid;
+            border-radius: 6px;
+        }
+        canvas{
+            margin-bottom: -4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvas-wrapper">
+        <canvas id="gameCanvas" width="1200" height="800"></canvas>
+    </div>
+
+    <script>
+        function adaptCanvasSize(){
+            const ratio = 3/2;
+            const canvas = document.getElementById('gameCanvas');
+            let {width, height} = document.body.getBoundingClientRect();
+            width -= 16; height -= 48;
+            if(height * ratio > width){
+                canvas.width = width;
+                canvas.height = width / ratio;
+            }else{
+                canvas.width = height * ratio;
+                canvas.height = height;
+            }
+        }
+        
+        adaptCanvasSize();
+        window.onresize = adaptCanvasSize;
+    </script>
+
+    <script src="./dist/card_game.js"></script>
+</body>
+</html>
